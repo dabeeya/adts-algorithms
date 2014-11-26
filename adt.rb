@@ -260,24 +260,21 @@ ll.display
 
 #Algorithms
 #bubble sort
-def bubble_sort(array)
+def bubblesortmine(array)
   n = array.length
-  loop do
-    swapped = false
-
+  swapped = false
+  while !swapped do
+    swapped = true
     (n-1).times do |i|
       if array[i] > array[i+1]
-        array[i], array[i+1] = array[i+1], array[i]
-        swapped = true
+        array[i], array[i+1] = array[i+1],array[i]
+        swapped = false
       end
     end
-
-    break if not swapped
   end
-
-  array
+  print array
 end
-bubble_sort([1,4,6,3,7])
+bubblesortmine([100,1,8,7,6,-1,4])
 
 #merge sort
 
