@@ -262,13 +262,13 @@ ll.display
 #bubble sort
 def bubblesortmine(array)
   n = array.length
-  swapped = false
-  while !swapped do
-    swapped = true
+  swapped = true
+  while swapped do
+    swapped = false
     (n-1).times do |i|
       if array[i] > array[i+1]
         array[i], array[i+1] = array[i+1],array[i]
-        swapped = false
+        swapped = true
       end
     end
   end
@@ -361,4 +361,22 @@ ary = [0,1,4,5,6,7,8,9,12,26,45,67,78,90,98,123,211,234,456,769,865,2345,3215,14
   else
     puts "#{val} not found in array"
   end
+end
+# insertion sort
+
+def insertionSort(arr)
+  for size in 2..arr.length
+      # Remember, this is a zero-start array
+      element = arr[size-1]
+
+      # Bring this element down to its appropriate position
+      # elements[0] ... elemets[size-2] are already in a sorted order
+      index = size - 2
+      while(index >= 0) && (element < arr[index])
+          arr[index + 1] = arr[index]
+          index-=1
+      end
+      arr[index+1] = element
+  end
+  print arr
 end
