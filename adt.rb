@@ -366,8 +366,8 @@ end
 
 def insertionSort(arr)
   for size in 2..arr.length
-      # Remember, this is a zero-start array
-      element = arr[size-1]
+    # Remember, this is a zero-start array
+    element = arr[size-1]
 
       # Bring this element down to its appropriate position
       # elements[0] ... elemets[size-2] are already in a sorted order
@@ -376,7 +376,32 @@ def insertionSort(arr)
           arr[index + 1] = arr[index]
           index-=1
       end
-      arr[index+1] = element
+    arr[index+1] = element
   end
   print arr
 end
+
+def merge_sort(array)
+  return array if array.size <= 1
+  left = merge_sort(array[0, array.size / 2])
+  right = merge_sort(array[array.size / 2, array.size])
+
+  merge(left, right)
+end
+
+
+def merge(left, right)
+  result = []
+
+  while left.size > 0 && right.size > 0
+    result << if left[0] <= right[0]
+      left.shift
+    else
+      right.shift
+    end
+  end
+
+  result.concat(left).concat(right)
+end
+
+p merge_sort([1,5,6,3,2,0])
