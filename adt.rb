@@ -26,12 +26,6 @@ class SimpleStack
   end
 end
 
-# deck = SimpleStack.new
-# deck.push(1)
-# deck.push(2)
-# deck.push(3)
-# deck.peek
-
 #a more complex version of stack
 class Stack
   def initialize(size)
@@ -106,21 +100,7 @@ class SimpleQueue
       print x
     end
   end
-
 end
-
-# line = SimpleQueue.new
-# line.enqueue(1)
-# line.enqueue(2)
-# line.enqueue(3)
-# puts line.size
-# line.dequeue
-# puts line.size
-# line.show
-
-
-
-
 
 #more complex version
 class Queue
@@ -278,38 +258,7 @@ bubblesortmine([100,1,8,7,6,-1,4])
 
 #merge sort
 
-def mergesort(array)
-  def merge(left_sorted, right_sorted)
-    res = []
-    l = 0
-    r = 0
 
-    loop do
-      break if r >= right_sorted.length and l >= left_sorted.length
-
-      if r >= right_sorted.length or (l < left_sorted.length and left_sorted[l] < right_sorted[r])
-        res << left_sorted[l]
-        l += 1
-      else
-        res << right_sorted[r]
-        r += 1
-      end
-    end
-
-    return res
-  end
-
-  def mergesort_iter(array_sliced)
-    return array_sliced if array_sliced.length <= 1
-
-    mid = array_sliced.length/2 - 1
-    left_sorted = mergesort_iter(array_sliced[0..mid])
-    right_sorted = mergesort_iter(array_sliced[mid+1..-1])
-    return merge(left_sorted, right_sorted)
-  end
-
-  mergesort_iter(array)
-end
 
 #binary search RECURSIVE
 class Array
@@ -337,50 +286,33 @@ end
 
 #binary search iterative
 
-class Array
-  def binary_search_iterative(val)
-    low, high = 0, length - 1
-    while low <= high
-      mid = (low + high) / 2
-      case
-        when self[mid] > val then high = mid - 1
-        when self[mid] < val then low = mid + 1
-        else return mid
-      end
-    end
-    nil
-  end
-end
+# class Array
+#   def binary_search_iterative(val)
+#     low, high = 0, length - 1
+#     while low <= high
+#       mid = (low + high) / 2
+#       case
+#         when self[mid] > val then high = mid - 1
+#         when self[mid] < val then low = mid + 1
+#         else return mid
+#       end
+#     end
+#     nil
+#   end
+# end
 
-ary = [0,1,4,5,6,7,8,9,12,26,45,67,78,90,98,123,211,234,456,769,865,2345,3215,14345,24324]
+# ary = [0,1,4,5,6,7,8,9,12,26,45,67,78,90,98,123,211,234,456,769,865,2345,3215,14345,24324]
 
-[0,42,45,24324,99999].each do |val|
-  i = ary.binary_search_iterative(val)
-  if i
-    puts "found #{val} at index #{i}: #{ary[i]}"
-  else
-    puts "#{val} not found in array"
-  end
-end
-# insertion sort
+# [0,42,45,24324,99999].each do |val|
+#   i = ary.binary_search_iterative(val)
+#   if i
+#     puts "found #{val} at index #{i}: #{ary[i]}"
+#   else
+#     puts "#{val} not found in array"
+#   end
+# end
 
-def insertionSort(arr)
-  for size in 2..arr.length
-    # Remember, this is a zero-start array
-    element = arr[size-1]
-
-      # Bring this element down to its appropriate position
-      # elements[0] ... elemets[size-2] are already in a sorted order
-      index = size - 2
-      while(index >= 0) && (element < arr[index])
-          arr[index + 1] = arr[index]
-          index-=1
-      end
-    arr[index+1] = element
-  end
-  print arr
-end
-
+# merge sort
 def merge_sort(array)
   return array if array.size <= 1
   left = merge_sort(array[0, array.size / 2])
@@ -405,3 +337,36 @@ def merge(left, right)
 end
 
 p merge_sort([1,5,6,3,2,0])
+
+def selectionSort(arr)
+  for index in 0..(arr.length-1)
+    temp = arr[index]
+    min = temp
+    indexToSwap = index
+    for selectedIndex in (index+1)..(arr.length-1)
+      if arr[selectedIndex] < min
+        min = arr[selectedIndex]
+        indexToSwap = selectedIndex
+      end
+    end
+    arr[indexToSwap] = temp
+    arr[index] = min
+  end
+end
+
+def insertionSort(arr)
+  for size in 2..arr.length
+    # Remember, this is a zero-start array
+    element = arr[size-1]
+
+      # Bring this element down to its appropriate position
+      # elements[0] ... elemets[size-2] are already in a sorted order
+      index = size - 2
+      while(index >= 0) && (element < arr[index])
+          arr[index + 1] = arr[index]
+          index-=1
+      end
+    arr[index+1] = element
+  end
+  print arr
+end
