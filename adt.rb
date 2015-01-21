@@ -157,7 +157,6 @@ class Node
     @next_node = next_in_line
     #puts "Initialized a Node with value:  " + value.to_s
   end
-
 end
 
 
@@ -217,33 +216,35 @@ ll.add(3)
 ll.add(4)
 ll.display
 
-#random node, was creating a tree
-# class Node
-#   attr_accessor :value, :leftchild, :rightchild
+#btree
+class Node
+  attr_accessor :value, :leftchild, :rightchild
+  def initialize (value, leftchildv, rightchildv)
+    @value = value
+    @leftchild = leftchildv
+    @rightchild = rightchildv
+  end
+end
 
-#   def initialize (value)
-#     @value = value
-#   end
+class BTree
+  def initialize(value)
+    @root = Node.new(value, nil, nil)
+  end
 
-# end
+  def add()
+  end
 
-# class Tree
-#   attr_accessor :root
+  def delete
+  end
 
-#   def initialize()
-#   end
-
-#   def add
-#   end
-
-# end
+end
 
 #Algorithms
 #bubble sort
 def bubblesortmine(array)
   n = array.length
   swapped = true
-  while swapped do
+  while swapped
     swapped = false
     (n-1).times do |i|
       if array[i] > array[i+1]
@@ -365,8 +366,125 @@ def insertionSort(arr)
       while(index >= 0) && (element < arr[index])
           arr[index + 1] = arr[index]
           index-=1
+          # print arr
       end
     arr[index+1] = element
   end
   print arr
 end
+
+insertionSort([5,3,1,0])
+
+
+# binary search log n, finds the position, but array must be sorted to use binary search
+def binary_search(array, key, low=0, high=array.size-1)
+  return -1 if low > high
+  mid = (low + high) / 2
+  return mid if array[mid]==key
+  if array[mid] > key
+    high = mid - 1
+  else
+    low = mid + 1
+  end
+  binary_search(array, key, low, high)
+end
+
+ary = [1,2,3,4,5,6,7,8]
+puts binary_search(ary, 8)
+
+def largest(arr)
+  s = arr.first
+  arr.each do |x|
+    if x > s
+      s = x
+    end
+  end
+  puts s
+end
+
+largest([1,4,6,7,9])
+
+
+
+# binary search tree
+
+class TreeNode
+    attr_accessor :value, :left, :right
+
+    # The Tree node contains a value, and a pointer to two children - left and right
+    # Values lesser than this node will be inserted on its left
+    # Values greater than it will be inserted on its right
+    def initialize val,left,right
+        @value = val
+        @left = left
+        @right = right
+    end
+end
+
+class BinarySearchTree
+
+    # Initialize the Root Node
+    def initialize val
+        puts "Initializing with: " + val.to_s
+        @root = TreeNode.new(val,nil,nil)
+    end
+
+    # Pre-Order Traversal
+    def preOrderTraversal(node= @root)
+        return if (node == nil)
+        preOrderTraversal(node.left)
+        preOrderTraversal(node.right)
+        puts node.value.to_s
+    end
+
+    # Post-Order Traversal
+    def postOrderTraversal(node = @root)
+        return if (node == nil)
+        puts node.value.to_s
+        postOrderTraversal(node.left)
+        postOrderTraversal(node.right)
+    end
+
+    # In-Order Traversal : Displays the final output in sorted order
+    # Display smaller children first (by going left)
+    # Then display the value in the current node
+    # Then display the larger children on the right
+    def inOrderTraversal(node = @root)
+        return if (node == nil)
+        inOrderTraversal(node.left)
+        puts node.value.to_s
+        inOrderTraversal(node.right)
+    end
+
+
+    # Inserting a value
+    # When value > current node, go towards the right
+    # when value < current node, go towards the left
+    # when you hit a nil node, it means, the new node should be created there
+    # Duplicate values are not inserted in the tree
+    def insert(value)
+        puts "Inserting :" + value.to_s
+        current_node = @root
+        while nil != current_node
+            if (value < current_node.value) && (current_node.left == nil)
+                current_node.left = TreeNode.new(value,nil,nil)
+            elsif  (value > current_node.value) && (current_node.right == nil)
+                current_node.right = TreeNode.new(value,nil,nil)
+            elsif (value < current_node.value)
+                current_node = current_node.left
+            elsif (value > current_node.value)
+                current_node = current_node.right
+            else
+                return
+            end
+        end
+    end
+end
+
+a = [ 1, 2, 3, 3, 4, 3, 3]
+h = {}
+a.each { | v | h.store(v, h[v]+1) }
+p h
+p h.key(4)
+
+
