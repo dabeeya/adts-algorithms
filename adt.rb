@@ -241,7 +241,7 @@ end
 
 #Algorithms
 #bubble sort
-def bubblesortmine(array)
+def bubblesort_mine(array)
   n = array.length
   swapped = true
   while swapped
@@ -255,7 +255,7 @@ def bubblesortmine(array)
   end
   print array
 end
-bubblesortmine([100,1,8,7,6,-1,4])
+bubblesort_mine([100,1,8,7,6,-1,4])
 
 #merge sort
 
@@ -339,7 +339,7 @@ end
 
 p merge_sort([1,5,6,3,2,0])
 
-def selectionSort(arr)
+def selection_sort(arr)
   for index in 0..(arr.length-1)
     temp = arr[index]
     min = temp
@@ -355,7 +355,7 @@ def selectionSort(arr)
   end
 end
 
-def insertionSort(arr)
+def insertion_sort(arr)
   for size in 2..arr.length
     # Remember, this is a zero-start array
     element = arr[size-1]
@@ -373,7 +373,7 @@ def insertionSort(arr)
   print arr
 end
 
-insertionSort([5,3,1,0])
+insertion_sort([5,3,1,0])
 
 
 # binary search log n, finds the position, but array must be sorted to use binary search
