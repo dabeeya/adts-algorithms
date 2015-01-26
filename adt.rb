@@ -355,6 +355,17 @@ def selection_sort(arr)
   end
 end
 
+def selectionsort(list)
+  list.size.times do |start|
+    min = start
+    start.upto(list.size-1) do |i|
+      min = i if list[i] < list[min]
+    end
+    list[start], list[min] = list[min], list[start]
+  end
+  list
+end
+
 def insertion_sort(arr)
   for size in 2..arr.length
     # Remember, this is a zero-start array
@@ -374,6 +385,21 @@ def insertion_sort(arr)
 end
 
 insertion_sort([5,3,1,0])
+# uses each_with_index method
+def insertion_sort2(array)
+  array.each_with_index do |ele,i|
+    j = i - 1
+    while j >= 0
+      break if array[j] <= ele
+      array[j + 1] = array[j]
+      j -= 1
+    end
+    array[j + 1] = ele
+  end
+end
+
+p insertion_sort2([4,3,2,1])
+
 
 
 # binary search log n, finds the position, but array must be sorted to use binary search
@@ -432,17 +458,17 @@ class BinarySearchTree
     # Pre-Order Traversal
     def preOrderTraversal(node= @root)
         return if (node == nil)
+        puts node.value.to_s
         preOrderTraversal(node.left)
         preOrderTraversal(node.right)
-        puts node.value.to_s
     end
 
     # Post-Order Traversal
     def postOrderTraversal(node = @root)
         return if (node == nil)
-        puts node.value.to_s
         postOrderTraversal(node.left)
         postOrderTraversal(node.right)
+        puts node.value.to_s
     end
 
     # In-Order Traversal : Displays the final output in sorted order
@@ -486,5 +512,4 @@ h = {}
 a.each { | v | h.store(v, h[v]+1) }
 p h
 p h.key(4)
-
 
